@@ -25,25 +25,28 @@
             android:id="@+id/et_friend_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID"
-            android:enabled="false" />
+            android:enabled="false"
+            android:hint="ID" />
 
         <EditText
             android:id="@+id/et_friend_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name" />
+            android:hint="Name"
+            android:inputType="textPersonName"/>
 
         <EditText
             android:id="@+id/et_friend_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="phone"
             android:hint="Phone" />
 
         <EditText
             android:id="@+id/et_friend_created_on"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="Created on" />
 
         <LinearLayout

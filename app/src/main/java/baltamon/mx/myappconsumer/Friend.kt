@@ -7,8 +7,8 @@ import android.os.Parcelable
  * Created by Baltazar Rodriguez on 03/02/2018.
  */
 class Friend(val id: Int,
-             val friendName: String,
-             val friendPhone: String,
+             var friendName: String,
+             var friendPhone: String,
              val friendCreationOn: String) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),

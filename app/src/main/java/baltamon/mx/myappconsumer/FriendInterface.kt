@@ -5,4 +5,6 @@ package baltamon.mx.myappconsumer
  */
 interface FriendInterface {
     fun onFriendClick(friend: Friend)
+    fun onFriendDeleted(id: Int)
+    fun onFriendUpdated(friend: Friend)
 }
