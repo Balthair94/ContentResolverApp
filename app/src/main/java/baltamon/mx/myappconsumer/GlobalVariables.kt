@@ -1,9 +1,6 @@
 package baltamon.mx.myappconsumer
 
-import android.content.Context
 import android.net.Uri
-import android.widget.Toast
-
 /**
  * Created by Baltazar Rodriguez on 01/02/2018.
  */
@@ -29,4 +26,4 @@ val BASE_PATH = "friends" // Table name
 
 val CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH)
 
-val MY_PERMISSION_REQUEST = 100
+val FRIEND_OBJECT = "friend_object"

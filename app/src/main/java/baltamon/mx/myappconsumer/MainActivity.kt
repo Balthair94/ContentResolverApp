@@ -10,7 +10,7 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
-class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor> {
+class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor>, FriendInterface {
 
     var cursorAdapter: FriendsCursorAdapter? = null
 
@@ -48,4 +48,9 @@ class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor> 
 
     override fun onCreateLoader(p0: Int, p1: Bundle?): Loader<Cursor> =
             CursorLoader(this, CONTENT_URI, null, null, null, null)
+
+    override fun onFriendClick(friend: Friend) {
+        val dialog = FriendDetailDialogFragment.newInstance(friend)
+        dialog.show(supportFragmentManager, "fragment_friend_detail")
+    }
 }
