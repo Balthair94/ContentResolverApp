@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor>,
     override fun onFriendDeleted(id: Int) {
         contentResolver.delete(CONTENT_URI, FRIEND_ID + "=" + id, null)
         restartLoader()
-        showToast("We are not friend anymore :(")
+        showToast("We are not friends anymore :(")
     }
 
     override fun onFriendUpdated(friend: Friend) {
