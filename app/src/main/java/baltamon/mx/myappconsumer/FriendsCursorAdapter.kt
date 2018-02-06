@@ -12,9 +12,11 @@ import android.widget.TextView
 /**
  * Created by Baltazar Rodriguez on 01/02/2018.
  */
-class FriendsCursorAdapter(context: Context, cursor: Cursor?, flags: Int): CursorAdapter(context, cursor, flags) {
+class FriendsCursorAdapter(context: Context, cursor: Cursor?, flags: Int):
+        CursorAdapter(context, cursor, flags) {
 
     var listener: FriendInterface? = null
+
     override fun newView(p0: Context?, p1: Cursor?, p2: ViewGroup?): View =
             LayoutInflater.from(p0).inflate(R.layout.layout_item_list, p2, false)
 

@@ -8,6 +8,8 @@ import android.database.Cursor
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
@@ -36,6 +38,18 @@ class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor>,
         supportActionBar?.title = "Consumer Friends List"
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.my_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.refresh_list -> restartLoader()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     fun restartLoader() {
         loaderManager.restartLoader(0, null, this)
     }
@@ -57,18 +71,28 @@ class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor>,
     }
 
     override fun onFriendDeleted(id: Int) {
-        contentResolver.delete(CONTENT_URI, FRIEND_ID + "=" + id, null)
-        restartLoader()
-        showToast("We are not friends anymore :(")
+        val delCount = contentResolver.delete(CONTENT_URI, FRIEND_ID + "=" + id, null)
+        if (delCount > 0){
+            restartLoader()
+            showToast("We are not friends anymore :(")
+        } else {
+            showToast("Record no deleted")
+        }
     }
 
     override fun onFriendUpdated(friend: Friend) {
         val values = ContentValues()
+        val stringArgs = arrayOf(friend.id.toString())
         values.put(FRIEND_NAME, friend.friendName)
         values.put(FRIEND_PHONE, friend.friendPhone)
-        contentResolver.update(CONTENT_URI, values, FRIEND_ID + "=" + friend.id, null)
-        restartLoader()
-        showToast("Friend Updated")
+        val updCount = contentResolver.update(CONTENT_URI, values, FRIEND_ID + "=?", stringArgs)
+
+        if(updCount > 0) {
+            restartLoader()
+            showToast("Friend Updated")
+        } else {
+            showToast("Record no updated")
+        }
     }
 
     fun showToast(message: String){
